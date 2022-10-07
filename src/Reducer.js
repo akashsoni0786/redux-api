@@ -6,6 +6,9 @@ export const initialState = {
     if (action.type === "LOGIN") {
       return { name: action.username};
     }
+    if(action.type === "LOGOUT"){
+      return { name : ""}
+    }
     
     return state;
   };

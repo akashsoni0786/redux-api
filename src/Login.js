@@ -57,6 +57,9 @@ const Login = (props) => {
             state: { user_name: name },
           });
         // alert("Done..........")
+        sessionStorage.setItem("customer_name", props.name);
+        sessionStorage.setItem("username", user);
+        
           setClicked("no");
           setUser("");
           setPass("");
@@ -70,7 +73,6 @@ const setnamefunc =(e)=>{
   setName(e)
   props.users_name(e)
 }
-console.log(props)
   return (
     <Page title="Login">
       <Card sectioned>

@@ -8,14 +8,23 @@ import {
   import {ArrowLeftMinor, QuestionMarkMajor} from '@shopify/polaris-icons';
   import {useState, useCallback} from 'react';
 import { connect } from 'react-redux';
-import { mapStatetoprops } from './mapstatedispatch';
+import { useNavigate } from 'react-router-dom';
+import { mapDispatchtoprops, mapStatetoprops } from './mapstatedispatch';
   
   function Dashboard(props) {
+    const navigate = useNavigate()
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
     const [isSearchActive, setIsSearchActive] = useState(false);
     const [searchValue, setSearchValue] = useState('');
   
+    const loggingout =()=>{
+      // alert("KK")
+      props.logout_user()
+      navigate("/");
+      sessionStorage.clear();
+      // alert(props.name)
+    }
     const toggleIsUserMenuOpen = useCallback(
       () => setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen),
       [],
@@ -55,12 +64,12 @@ import { mapStatetoprops } from './mapstatedispatch';
             items: [{content: 'Back to Shopify', icon: ArrowLeftMinor}],
           },
           {
-            items: [{content: 'Community forums'}],
+            items: [{content: 'Logout',onAction:loggingout}],
           },
         ]}
-        name={props.name}
-        detail={props.name}
-        initials={props.name[0]}
+        name={sessionStorage.getItem("customer_name")}
+        detail={sessionStorage.getItem("customer_name")}
+        initials={sessionStorage.getItem("customer_name")[0]}
         open={isUserMenuOpen}
         onToggle={toggleIsUserMenuOpen}
       />
@@ -68,7 +77,8 @@ import { mapStatetoprops } from './mapstatedispatch';
   
     const searchResultsMarkup = (
       <ActionList
-        items={[{content: 'Shopify help center'}, {content: 'Community forums'}]}
+        items={[{content: 'Shopify help center'}, 
+        {content: 'Community forums'}]}
       />
     );
   
@@ -119,4 +129,4 @@ import { mapStatetoprops } from './mapstatedispatch';
       </div>
     );
   }
-  export default connect(mapStatetoprops)(Dashboard)
+  export default connect(mapStatetoprops,mapDispatchtoprops)(Dashboard)
