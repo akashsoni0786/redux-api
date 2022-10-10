@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { useState, useCallback } from "react";
 import "@shopify/polaris/build/esm/styles.css";
 import { useNavigate } from "react-router-dom";
-import { mapDispatchtoprops, mapStatetoprops } from "./mapstatedispatch";
+import { mapDispatchtoprops, mapStatetoprops } from "./redux/mapstatedispatch";
 
 const Login = (props) => {
 

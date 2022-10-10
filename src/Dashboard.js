@@ -9,7 +9,7 @@ import {
   import {useState, useCallback} from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { mapDispatchtoprops, mapStatetoprops } from './mapstatedispatch';
+import { mapDispatchtoprops, mapStatetoprops } from './redux/mapstatedispatch';
   
   function Dashboard(props) {
     const navigate = useNavigate()
@@ -19,11 +19,9 @@ import { mapDispatchtoprops, mapStatetoprops } from './mapstatedispatch';
     const [searchValue, setSearchValue] = useState('');
   
     const loggingout =()=>{
-      // alert("KK")
       props.logout_user()
       navigate("/");
       sessionStorage.clear();
-      // alert(props.name)
     }
     const toggleIsUserMenuOpen = useCallback(
       () => setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen),
